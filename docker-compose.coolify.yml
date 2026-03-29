@@ -1,0 +1,59 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: docker/frontend.Dockerfile
+      args:
+        VITE_API_BASE_URL: /api
+        VITE_SIM_BASE_URL: /sim
+        VITE_USER_MODEL_BASE_URL: /user-models
+    depends_on:
+      api:
+        condition: service_healthy
+      sim:
+        condition: service_healthy
+    expose:
+      - "80"
+    volumes:
+      - user_models:/usr/share/nginx/html/user-models
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O /dev/null http://127.0.0.1/ || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 20s
+
+  api:
+    build:
+      context: .
+      dockerfile: docker/api.Dockerfile
+    environment:
+      OPENWEATHER_API_KEY: ${OPENWEATHER_API_KEY}
+      TETRA_MODEL_UPLOAD_DIR: ${TETRA_MODEL_UPLOAD_DIR:-/data/user-models}
+      HERMES_DIR_NAME: hermes_module
+    volumes:
+      - user_models:/data/user-models
+    expose:
+      - "8010"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8010/api/health', timeout=5).read()"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 20s
+
+  sim:
+    build:
+      context: .
+      dockerfile: docker/sim.Dockerfile
+    expose:
+      - "5000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:5000/health', timeout=5).read()"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 20s
+
+volumes:
+  user_models:

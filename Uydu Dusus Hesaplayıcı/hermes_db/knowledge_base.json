@@ -1,0 +1,441 @@
+{
+    "msi_factors": {
+        "COPV": 0.9,
+        "Propellant Tanks (Stainless Steel)": 0.7,
+        "Propellant Tanks (Titanium)": 0.85,
+        "Engine Thrust Chambers (Steel/Superalloy)": 0.6,
+        "Engine Turbopumps": 0.5,
+        "Propellant Tanks (Aluminum - thin wall)": 0.05,
+        "Heat Shield Tiles": 0.3,
+        "Structural Tubing": 0.02,
+        "Carbon Fiber Composite Structures": 0.45,
+        "Batteries": 0.2,
+        "Nuclear RTG Components": 0.99
+    },
+    "rockets": {
+        "Saturn V": {
+            "flights": 13,
+            "confidence": "HIGH",
+            "propellant_type": "LOX/RP-1",
+            "stages": [
+                {
+                    "name": "S-IC (1. Kademe)",
+                    "stage_num": 1,
+                    "thrust_kn": 34020,
+                    "propellant_mass_kg": 2077000,
+                    "empty_mass_kg": 131000,
+                    "burn_time_s": 150,
+                    "diameter_m": 10.1,
+                    "material": "Propellant Tanks (Aluminum - thin wall)",
+                    "surviving_component": "Engine Thrust Chambers (Steel/Superalloy)",
+                    "disposal": "OCEAN_IMPACT"
+                },
+                {
+                    "name": "S-II (2. Kademe)",
+                    "stage_num": 2,
+                    "thrust_kn": 5141,
+                    "propellant_mass_kg": 444000,
+                    "empty_mass_kg": 36000,
+                    "burn_time_s": 360,
+                    "diameter_m": 10.1,
+                    "material": "Propellant Tanks (Aluminum - thin wall)",
+                    "surviving_component": "None",
+                    "disposal": "OCEAN_IMPACT"
+                },
+                {
+                    "name": "S-IVB (3. Kademe)",
+                    "stage_num": 3,
+                    "thrust_kn": 1000,
+                    "propellant_mass_kg": 107000,
+                    "empty_mass_kg": 11900,
+                    "burn_time_s": 475,
+                    "diameter_m": 6.6,
+                    "material": "Propellant Tanks (Aluminum - thin wall)",
+                    "surviving_component": "None",
+                    "disposal": "LUNAR_IMPACT"
+                }
+            ]
+        },
+        "Falcon 9": {
+            "flights": 300,
+            "confidence": "HIGH",
+            "propellant_type": "LOX/RP-1",
+            "stages": [
+                {
+                    "name": "Merlin Cluster (1. Kademe)",
+                    "stage_num": 1,
+                    "thrust_kn": 7607,
+                    "propellant_mass_kg": 395700,
+                    "empty_mass_kg": 26000,
+                    "burn_time_s": 162,
+                    "diameter_m": 3.7,
+                    "material": "Structural Tubing",
+                    "surviving_component": "None",
+                    "disposal": "RECOVERY"
+                },
+                {
+                    "name": "MVac (2. Kademe)",
+                    "stage_num": 2,
+                    "thrust_kn": 981,
+                    "propellant_mass_kg": 92670,
+                    "empty_mass_kg": 4000,
+                    "burn_time_s": 397,
+                    "diameter_m": 3.7,
+                    "material": "Propellant Tanks (Aluminum - thin wall)",
+                    "surviving_component": "COPV",
+                    "disposal": "CONTROLLED_DEORBIT"
+                },
+                {
+                    "name": "Payload Fairing",
+                    "stage_num": 3,
+                    "thrust_kn": 0,
+                    "propellant_mass_kg": 0,
+                    "empty_mass_kg": 1900,
+                    "burn_time_s": 0,
+                    "diameter_m": 5.2,
+                    "material": "Carbon Fiber Composite Structures",
+                    "surviving_component": "Carbon Fiber Composite Structures",
+                    "disposal": "RECOVERY"
+                }
+            ]
+        },
+        "Long March 5B": {
+            "flights": 4,
+            "confidence": "HIGH",
+            "propellant_type": "LOX/LH2",
+            "stages": [
+                {
+                    "name": "YF-77 Core (1. Kademe)",
+                    "stage_num": 1,
+                    "thrust_kn": 10565,
+                    "propellant_mass_kg": 158000,
+                    "empty_mass_kg": 21000,
+                    "burn_time_s": 480,
+                    "diameter_m": 5.0,
+                    "material": "Propellant Tanks (Aluminum - thin wall)",
+                    "surviving_component": "Structural Tubing",
+                    "disposal": "UNCONTROLLED_REENTRY"
+                }
+            ]
+        },
+        "Proton-M": {
+            "flights": 115,
+            "confidence": "HIGH",
+            "propellant_type": "UDMH/N2O4",
+            "stages": [
+                {
+                    "name": "RD-253 Cluster (1. Kademe)",
+                    "stage_num": 1,
+                    "thrust_kn": 10470,
+                    "propellant_mass_kg": 419000,
+                    "empty_mass_kg": 30000,
+                    "burn_time_s": 120,
+                    "diameter_m": 7.4,
+                    "material": "Propellant Tanks (Aluminum - thin wall)",
+                    "surviving_component": "Structural Tubing",
+                    "disposal": "GROUND_IMPACT"
+                },
+                {
+                    "name": "RD-0210 (2. Kademe)",
+                    "stage_num": 2,
+                    "thrust_kn": 2399,
+                    "propellant_mass_kg": 157000,
+                    "empty_mass_kg": 11000,
+                    "burn_time_s": 206,
+                    "diameter_m": 4.1,
+                    "material": "Propellant Tanks (Aluminum - thin wall)",
+                    "surviving_component": "None",
+                    "disposal": "GROUND_IMPACT"
+                },
+                {
+                    "name": "RD-0212 (3. Kademe)",
+                    "stage_num": 3,
+                    "thrust_kn": 613,
+                    "propellant_mass_kg": 46562,
+                    "empty_mass_kg": 3500,
+                    "burn_time_s": 238,
+                    "diameter_m": 4.1,
+                    "material": "Propellant Tanks (Aluminum - thin wall)",
+                    "surviving_component": "None",
+                    "disposal": "CONTROLLED_DEORBIT"
+                }
+            ]
+        },
+        "Soyuz-2": {
+            "flights": 70,
+            "confidence": "HIGH",
+            "propellant_type": "LOX/RP-1",
+            "stages": [
+                {
+                    "name": "RD-107A Boosters (1. Kademe)",
+                    "stage_num": 1,
+                    "thrust_kn": 8380,
+                    "propellant_mass_kg": 156640,
+                    "empty_mass_kg": 15200,
+                    "burn_time_s": 118,
+                    "diameter_m": 10.3,
+                    "material": "Propellant Tanks (Aluminum - thin wall)",
+                    "surviving_component": "Structural Tubing",
+                    "disposal": "GROUND_IMPACT"
+                },
+                {
+                    "name": "RD-108A Core (2. Kademe)",
+                    "stage_num": 2,
+                    "thrust_kn": 792,
+                    "propellant_mass_kg": 90200,
+                    "empty_mass_kg": 6545,
+                    "burn_time_s": 286,
+                    "diameter_m": 2.66,
+                    "material": "Propellant Tanks (Aluminum - thin wall)",
+                    "surviving_component": "None",
+                    "disposal": "OCEAN_IMPACT"
+                },
+                {
+                    "name": "RD-0124 Block-I (3. Kademe)",
+                    "stage_num": 3,
+                    "thrust_kn": 298,
+                    "propellant_mass_kg": 22700,
+                    "empty_mass_kg": 2355,
+                    "burn_time_s": 240,
+                    "diameter_m": 2.66,
+                    "material": "Propellant Tanks (Aluminum - thin wall)",
+                    "surviving_component": "None",
+                    "disposal": "CONTROLLED_DEORBIT"
+                }
+            ]
+        },
+        "Starship": {
+            "flights": 7,
+            "confidence": "LOW",
+            "propellant_type": "LOX/CH4",
+            "stages": [
+                {
+                    "name": "Super Heavy Booster (1. Kademe)",
+                    "stage_num": 1,
+                    "thrust_kn": 74000,
+                    "propellant_mass_kg": 3400000,
+                    "empty_mass_kg": 200000,
+                    "burn_time_s": 162,
+                    "diameter_m": 9.0,
+                    "material": "Propellant Tanks (Stainless Steel)",
+                    "surviving_component": "Propellant Tanks (Stainless Steel)",
+                    "disposal": "RECOVERY"
+                },
+                {
+                    "name": "Starship Upper (2. Kademe)",
+                    "stage_num": 2,
+                    "thrust_kn": 7300,
+                    "propellant_mass_kg": 1200000,
+                    "empty_mass_kg": 100000,
+                    "burn_time_s": 540,
+                    "diameter_m": 9.0,
+                    "material": "Propellant Tanks (Stainless Steel)",
+                    "surviving_component": "Heat Shield Tiles",
+                    "disposal": "RECOVERY"
+                }
+            ]
+        },
+        "Mir İstasyonu": {
+            "flights": 1,
+            "confidence": "HIGH",
+            "propellant_type": "Hydrazine (RCS)",
+            "stages": [
+                {
+                    "name": "Main Module Core",
+                    "stage_num": 1,
+                    "thrust_kn": 0,
+                    "propellant_mass_kg": 5000,
+                    "empty_mass_kg": 125000,
+                    "burn_time_s": 0,
+                    "diameter_m": 4.1,
+                    "material": "Engine Turbopumps",
+                    "disposal": "UNCONTROLLED_REENTRY"
+                }
+            ]
+        },
+        "Ares 1 (B)": {
+            "flights": 1,
+            "confidence": "HIGH",
+            "propellant_type": "Solid / LOX+LH2",
+            "stages": [
+                {
+                    "name": "First Stage (SRB)",
+                    "stage_num": 1,
+                    "thrust_kn": 16000,
+                    "propellant_mass_kg": 700000,
+                    "empty_mass_kg": 100000,
+                    "burn_time_s": 126,
+                    "diameter_m": 3.7,
+                    "material": "Structural Tubing",
+                    "disposal": "OCEAN_IMPACT"
+                },
+                {
+                    "name": "J-2X Upper Stage",
+                    "stage_num": 2,
+                    "thrust_kn": 1300,
+                    "propellant_mass_kg": 138000,
+                    "empty_mass_kg": 15000,
+                    "burn_time_s": 450,
+                    "diameter_m": 5.5,
+                    "material": "Propellant Tanks (Aluminum - thin wall)",
+                    "disposal": "CONTROLLED_DEORBIT"
+                }
+            ]
+        },
+        "Space Shuttle": {
+            "flights": 135,
+            "confidence": "HIGH",
+            "propellant_type": "Solid / LOX+LH2",
+            "stages": [
+                {
+                    "name": "SRB Pair",
+                    "stage_num": 1,
+                    "thrust_kn": 29000,
+                    "propellant_mass_kg": 1000000,
+                    "empty_mass_kg": 180000,
+                    "burn_time_s": 124,
+                    "diameter_m": 3.7,
+                    "material": "Engine Turbopumps",
+                    "disposal": "OCEAN_IMPACT"
+                },
+                {
+                    "name": "External Tank",
+                    "stage_num": 2,
+                    "thrust_kn": 0,
+                    "propellant_mass_kg": 735000,
+                    "empty_mass_kg": 26500,
+                    "burn_time_s": 480,
+                    "diameter_m": 8.4,
+                    "material": "Propellant Tanks (Aluminum - thin wall)",
+                    "disposal": "UNCONTROLLED_REENTRY"
+                }
+            ]
+        },
+        "Jupiter-C Rocket": {
+            "flights": 3,
+            "confidence": "HIGH",
+            "propellant_type": "Hydyne / LOX",
+            "stages": [
+                {
+                    "name": "Redstone First Stage",
+                    "stage_num": 1,
+                    "thrust_kn": 370,
+                    "propellant_mass_kg": 25000,
+                    "empty_mass_kg": 3000,
+                    "burn_time_s": 155,
+                    "diameter_m": 1.78,
+                    "material": "Propellant Tanks (Aluminum - thin wall)",
+                    "disposal": "GROUND_IMPACT"
+                }
+            ]
+        },
+        "Agena Target": {
+            "flights": 10,
+            "confidence": "HIGH",
+            "propellant_type": "UDMH / IRFNA",
+            "stages": [
+                {
+                    "name": "Agena-D Stage",
+                    "stage_num": 1,
+                    "thrust_kn": 71,
+                    "propellant_mass_kg": 6000,
+                    "empty_mass_kg": 700,
+                    "burn_time_s": 240,
+                    "diameter_m": 1.5,
+                    "material": "Engine Turbopumps",
+                    "disposal": "CONTROLLED_DEORBIT"
+                }
+            ]
+        },
+        "Cassini-Huygens": {
+            "name": "Cassini-Huygens",
+            "flights": 1,
+            "confidence": "YUKSEK (AI OGRENDI)",
+            "propellant_type": "Kero-LOX / LOX-LH2",
+            "stages": [
+                {
+                    "stage_num": 1,
+                    "name": "Cassini-Huygens Core Stage",
+                    "thrust_kn": 12000.0,
+                    "propellant_mass_kg": 420000.0,
+                    "empty_mass_kg": 32000.0,
+                    "burn_time_s": 160,
+                    "diameter_m": 3.7,
+                    "material": "Aerospatial-Alum",
+                    "disposal": "GROUND_IMPACT"
+                },
+                {
+                    "stage_num": 2,
+                    "name": "Cassini-Huygens Upper Stage",
+                    "thrust_kn": 1100.0,
+                    "propellant_mass_kg": 115000.0,
+                    "empty_mass_kg": 6000.0,
+                    "burn_time_s": 355,
+                    "diameter_m": 3.7,
+                    "material": "Poly-Composite",
+                    "disposal": "CONTROLLED_DEORBIT"
+                }
+            ]
+        },
+        "SoloŞŞAL_roket": {
+            "name": "SoloŞŞAL_roket",
+            "flights": 1,
+            "confidence": "YUKSEK (AI OGRENDI)",
+            "propellant_type": "Kero-LOX / LOX-LH2",
+            "stages": [
+                {
+                    "stage_num": 1,
+                    "name": "SoloŞŞAL_roket Core Stage",
+                    "thrust_kn": 12000.0,
+                    "propellant_mass_kg": 420000.0,
+                    "empty_mass_kg": 32000.0,
+                    "burn_time_s": 160,
+                    "diameter_m": 3.7,
+                    "material": "Aerospatial-Alum",
+                    "disposal": "GROUND_IMPACT"
+                },
+                {
+                    "stage_num": 2,
+                    "name": "SoloŞŞAL_roket Upper Stage",
+                    "thrust_kn": 1100.0,
+                    "propellant_mass_kg": 115000.0,
+                    "empty_mass_kg": 6000.0,
+                    "burn_time_s": 355,
+                    "diameter_m": 3.7,
+                    "material": "Poly-Composite",
+                    "disposal": "CONTROLLED_DEORBIT"
+                }
+            ]
+        },
+        "SoloŞŞAL a1": {
+            "name": "SoloŞŞAL a1",
+            "flights": 1,
+            "confidence": "YUKSEK (AI OGRENDI)",
+            "propellant_type": "Kero-LOX / LOX-LH2",
+            "stages": [
+                {
+                    "stage_num": 1,
+                    "name": "SoloŞŞAL a1 Core Stage",
+                    "thrust_kn": 12000.0,
+                    "propellant_mass_kg": 420000.0,
+                    "empty_mass_kg": 32000.0,
+                    "burn_time_s": 160,
+                    "diameter_m": 3.7,
+                    "material": "Aerospatial-Alum",
+                    "disposal": "GROUND_IMPACT"
+                },
+                {
+                    "stage_num": 2,
+                    "name": "SoloŞŞAL a1 Upper Stage",
+                    "thrust_kn": 1100.0,
+                    "propellant_mass_kg": 115000.0,
+                    "empty_mass_kg": 6000.0,
+                    "burn_time_s": 355,
+                    "diameter_m": 3.7,
+                    "material": "Poly-Composite",
+                    "disposal": "CONTROLLED_DEORBIT"
+                }
+            ]
+        }
+    }
+}

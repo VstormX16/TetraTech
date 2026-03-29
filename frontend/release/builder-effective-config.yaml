@@ -1,0 +1,17 @@
+directories:
+  output: release
+  buildResources: build
+appId: com.vstormx16.tetratech
+productName: TetraTech
+files:
+  - filter:
+      - dist/**/*
+      - electron/main.cjs
+extraResources:
+  - from: backend_bin
+    to: backend_bin
+    filter:
+      - '**/*'
+win:
+  target: nsis
+electronVersion: 41.1.0
