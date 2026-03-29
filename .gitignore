@@ -1,0 +1,56 @@
+# Source Control Exclusions
+# -------------------------
+
+# Dependencies
+node_modules/
+dist/
+dist-electron/
+build/
+bin/
+obj/
+out/
+.env
+.env.*
+.DS_Store
+
+# Temporary Files
+tmp/
+temp/
+*.tmp
+*.temp
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Binary Files & Artifacts
+*.exe
+*.pkg
+*.asar
+*.bin
+*.out
+*.dll
+*.so
+*.dylib
+*.log
+*.zip
+*.7z
+*.rar
+*.tar
+*.gz
+
+# IDE / Project Specific
+.vscode/
+.idea/
+*.swp
+*.swo
+*.user
+*.suo
+api.spec
+api_error.txt
+diff.txt
+
+# OS Specific
+Thumbs.db
+.DS_Store
+desktop.ini
