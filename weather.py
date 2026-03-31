@@ -1,7 +1,12 @@
+import os
+
 import requests
 
 def get_weather_data(lat=40.2, lon=29.0, city=None):
-    api_key = "0b206b5f574fc02dba4ef9fda36e10f5"
+    api_key = os.getenv("OPENWEATHER_API_KEY", "").strip()
+    if not api_key:
+        return {"city": "Hata", "coord": "-", "temp": "-", "feels_like": "-", "temp_min": "-", "temp_max": "-", "humidity": "-", "pressure": "-", "wind": "-", "clouds": "-", "visibility": "-", "desc": "OPENWEATHER_API_KEY tanimli degil"}
+
     if city:
         url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric&lang=tr"
     else:

@@ -10,6 +10,7 @@ import autoTable from 'jspdf-autotable'
 import html2canvas from 'html2canvas'
 import './App.css'
 import RocketSimPage from './components/rocketSim/RocketSimPage'
+import { apiUrl, getRocketModelUrl, simUrl, userModelUrl } from './lib/endpoints'
 
 // MUI ICONS
 import TerrainIcon from '@mui/icons-material/Terrain';
@@ -591,7 +592,7 @@ function App() {
 
   useEffect(() => {
     // Önce API'den ana üsleri çekelim (29 Üs)
-    fetch("http://localhost:8010/api/spaceports")
+    fetch(apiUrl('/spaceports'))
       .then(r => r.json())
       .then(apiBases => {
         const saved = localStorage.getItem('tt_spaceports');
@@ -653,7 +654,7 @@ function App() {
   const fetchTopo = async () => {
     setLoadingTopo(true)
     try {
-      const resp = await fetch(`http://localhost:8010/api/topo?lat=${position.lat}&lon=${position.lng}`)
+      const resp = await fetch(apiUrl(`/topo?lat=${position.lat}&lon=${position.lng}`))
       if (resp.ok) {
         const res = await resp.json()
         setData(prev => ({ ...prev, topo: res }))
@@ -671,7 +672,7 @@ function App() {
 
   // HERMES Roketlerini ve Sistem Roketlerini Senkronize Et
   useEffect(() => {
-    fetch('http://localhost:8010/api/hermes/rockets')
+    fetch(apiUrl('/hermes/rockets'))
       .then(r => r.json())
       .then(d => {
         if (d.rockets) {
@@ -699,8 +700,8 @@ function App() {
   const fetchWeather = async (customCity = null) => {
     setLoadingWeather(true)
     try {
-      let url = `http://localhost:8010/api/weather?lat=${position.lat}&lon=${position.lng}`
-      if (customCity) url = `http://localhost:8010/api/weather?city=${customCity}`
+      let url = apiUrl(`/weather?lat=${position.lat}&lon=${position.lng}`)
+      if (customCity) url = apiUrl(`/weather?city=${customCity}`)
       const resp = await fetch(url)
       if (resp.ok) {
         const res = await resp.json()
@@ -1255,7 +1256,7 @@ function App() {
   const fetchSpace = async () => {
     setLoadingSpace(true);
     try {
-      const resp = await fetch(`http://localhost:8010/api/space/current?lat=${position.lat}&lon=${position.lon}`);
+      const resp = await fetch(apiUrl(`/space/current?lat=${position.lat}&lon=${position.lon}`));
       const res = await resp.json();
 
       // ERKEN UYARI BİLDİRİM MANTIĞI
@@ -1276,7 +1277,7 @@ function App() {
   const fetchAirspace = async () => {
     setLoadingAirspace(true)
     try {
-      const resp = await fetch(`http://localhost:8010/api/airspace?lat=${position.lat}&lon=${position.lon}`)
+      const resp = await fetch(apiUrl(`/airspace?lat=${position.lat}&lon=${position.lon}`))
       if (resp.ok) {
         const res = await resp.json()
         setData(prev => ({ ...prev, airspace: res }))
@@ -1992,7 +1993,7 @@ function App() {
                       try {
                         const fd = new FormData();
                         fd.append("file", file);
-                        const res = await fetch("http://localhost:8010/api/upload_ork", { method: "POST", body: fd });
+                        const res = await fetch(apiUrl('/upload_ork'), { method: "POST", body: fd });
                         const json = await res.json();
                         if (json.status === "SUCCESS") {
                           const data = json.data;
@@ -2075,7 +2076,7 @@ function App() {
                           >
                             <Suspense fallback={null}>
                               <Stage environment="city" intensity={0.6} contactShadow={false} adjustCamera={true}>
-                                <ModelRenderer key={selectedRocket.filename} url={`/models/${selectedRocket.filename}`} />
+                                <ModelRenderer key={selectedRocket.modelPath || selectedRocket.filename} url={getRocketModelUrl(selectedRocket)} />
                               </Stage>
                             </Suspense>
                             <OrbitControls makeDefault />
@@ -2296,7 +2297,7 @@ function App() {
                           setSimProgressText('Çevre ve Hava Sahası Analiz Ediliyor...');
                           let currentResult = null;
                           try {
-                            let url = `http://localhost:8010/api/simulate?lat=${simBase.lat}&lon=${simBase.lon}&date=${simLive ? 'live' : simDate}&time_str=${simLive ? '' : simTime}&rocket_id=${simRocket.isCustom ? 'custom' : simRocket.id}`;
+                            let url = apiUrl(`/simulate?lat=${simBase.lat}&lon=${simBase.lon}&date=${simLive ? 'live' : simDate}&time_str=${simLive ? '' : simTime}&rocket_id=${simRocket.isCustom ? 'custom' : simRocket.id}`);
                             if (simRocket.isCustom) {
                               url += `&c_mass=${String(simRocket.dry_mass).replace(/[^0-9.]/g, '') || 1000}&c_tol=${simRocket.windTolerance || 10}&c_eff=${simRocket.efficiency || 0.8}&c_name=${encodeURIComponent(simRocket.name)}`;
                             }
@@ -2333,7 +2334,7 @@ function App() {
                              const parts = simRocket.orkParts || defaultParts;
                              
                              const simPayload = { windSpeed: parseFloat(windSpd), temperature: parseFloat(temp), pressure: parseFloat(press), parts: parts };
-                             const fb = await fetch('http://127.0.0.1:5000/simulate', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(simPayload)});
+                             const fb = await fetch(simUrl('/simulate'), { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(simPayload)});
                              const rawFlightRes = await fb.json();
                              if(rawFlightRes && rawFlightRes.ozet) {
                                setSimFlightResult({
@@ -2351,7 +2352,7 @@ function App() {
 
                           setSimProgressText('Hermes AI ile Enkaz Analizi Hesaplanıyor...');
                           try {
-                              const res = await fetch(`http://localhost:8010/api/hermes/predict?rocket_model=${encodeURIComponent(simRocket.name)}&lat=${simBase.lat}&lon=${simBase.lon}&azimuth=90`);
+                              const res = await fetch(apiUrl(`/hermes/predict?rocket_model=${encodeURIComponent(simRocket.name)}&lat=${simBase.lat}&lon=${simBase.lon}&azimuth=90`));
                               const data = await res.json();
                               setSimDebrisResult(data);
                           } catch(e) { console.error('Debris sim fail', e); setSimDebrisResult(null); }
@@ -2945,7 +2946,7 @@ function App() {
                           onClick={async () => {
                             setDebrisLoading(true);
                             try {
-                              const res = await fetch(`http://localhost:8010/api/hermes/predict?rocket_model=${encodeURIComponent(debrisSelectedRocket)}&lat=${debrisLaunchLat}&lon=${debrisLaunchLon}&azimuth=${debrisAzimuth}`);
+                              const res = await fetch(apiUrl(`/hermes/predict?rocket_model=${encodeURIComponent(debrisSelectedRocket)}&lat=${debrisLaunchLat}&lon=${debrisLaunchLon}&azimuth=${debrisAzimuth}`));
                               const data = await res.json();
                               if (data.error) { addToast('HATA', data.error, 'warning'); } else {
                                 setDebrisResult(data);
@@ -3132,7 +3133,7 @@ function App() {
                           try {
                             const fd = new FormData();
                             fd.append("file", file);
-                            const res = await fetch("http://localhost:8010/api/upload_ork", { method: "POST", body: fd });
+                            const res = await fetch(apiUrl('/upload_ork'), { method: "POST", body: fd });
                             const json = await res.json();
                             if (json.status === "SUCCESS") {
                               const data = json.data;
@@ -3237,7 +3238,7 @@ function App() {
                       const formData = new FormData();
                       formData.append("file", uploadFile);
 
-                      const uploadRes = await fetch("http://localhost:8010/api/upload_model", {
+                      const uploadRes = await fetch(apiUrl('/upload_model'), {
                         method: "POST",
                         body: formData
                       });
@@ -3250,6 +3251,7 @@ function App() {
                       ...newRocketData,
                       id: rocketId,
                       filename: uploadFileName,
+                      modelPath: uploadFileName ? userModelUrl(uploadFileName) : null,
                       isCustom: true,
                       efficiency: newRocketData.efficiency || 0.8
                     };

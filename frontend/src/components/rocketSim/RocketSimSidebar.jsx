@@ -9,6 +9,7 @@ import AirIcon from '@mui/icons-material/Air';
 import LayersIcon from '@mui/icons-material/Layers';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import PrecisionManufacturingIcon from '@mui/icons-material/PrecisionManufacturing';
+import { apiUrl } from '../../lib/endpoints';
 
 const PRESET_ROCKETS = {
   custom: { name: 'Özel Tasarım (Custom)', parts: [] },
@@ -46,7 +47,7 @@ export default function RocketSimSidebar() {
   const [dbRockets, setDbRockets] = useState({});
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8010/api/hermes/rockets')
+    fetch(apiUrl('/hermes/rockets'))
       .then(res => res.json())
       .then(data => {
         if (data.rockets) {
@@ -199,7 +200,7 @@ export default function RocketSimSidebar() {
     const city = prompt("Hangi şehir için gerçek zamanlı hava verisi çekilsin?", "Ankara");
     if (!city) return;
     try {
-      const res = await fetch(`http://localhost:8010/api/weather?city=${city}`);
+      const res = await fetch(apiUrl(`/weather?city=${city}`));
       if (res.ok) {
         const cData = await res.json();
         setWind(cData.wind?.toString() || "0");

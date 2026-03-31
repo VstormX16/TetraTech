@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { simUrl } from '../../lib/endpoints';
 
 const defaultParams = {
   windSpeed: 5,
@@ -76,7 +77,7 @@ export const useRocketSimStore = create((set) => ({
     });
     try {
       const state = useRocketSimStore.getState();
-      const res = await fetch('http://127.0.0.1:5000/simulate', {
+      const res = await fetch(simUrl('/simulate'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(state.params)

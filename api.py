@@ -18,6 +18,11 @@ HERMES_DIR = os.path.join(os.path.dirname(__file__), "Uydu Dusus Hesaplayıcı")
 if HERMES_DIR not in sys.path:
     sys.path.insert(0, HERMES_DIR)
 
+MODEL_UPLOAD_DIR = os.getenv(
+    "TETRA_MODEL_UPLOAD_DIR",
+    os.path.join(os.path.dirname(__file__), "frontend", "public", "user-models"),
+)
+
 app = FastAPI(title="TetraTech Mission Control API [ULTIMATE]")
 
 # CORS ayarları
@@ -75,12 +80,12 @@ def get_airspace(lat: float, lon: float):
 @app.post("/api/upload_model")
 async def upload_model(file: UploadFile = File(...)):
     try:
-        save_dir = os.path.join(os.path.dirname(__file__), "frontend", "public", "models")
-        os.makedirs(save_dir, exist_ok=True)
-        file_path = os.path.join(save_dir, file.filename)
+        os.makedirs(MODEL_UPLOAD_DIR, exist_ok=True)
+        safe_name = os.path.basename(file.filename)
+        file_path = os.path.join(MODEL_UPLOAD_DIR, safe_name)
         with open(file_path, "wb") as buffer:
             shutil.copyfileobj(file.file, buffer)
-        return {"status": "SUCCESS", "filename": file.filename}
+        return {"status": "SUCCESS", "filename": safe_name}
     except Exception as e:
         return {"status": "ERROR", "message": str(e)}
 
